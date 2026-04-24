@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx claude-code-templates@latest *)",
+      "Bash(npx superpowers@latest *)"
+    ]
+  }
+}
