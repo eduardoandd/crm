@@ -61,18 +61,18 @@ feat: setup inicial do projeto PipeFlow CRM
 **Objetivo**: O esqueleto visual do app — sidebar, header, navegação e tema funcionando.
 
 ### Entregas
-- [ ] Layout raiz em `app/layout.tsx` com fonte Inter e providers
-- [ ] Layout do dashboard em `app/(dashboard)/layout.tsx` com sidebar + área de conteúdo
-- [ ] Componente `Sidebar` com logo PipeFlow, links de navegação e workspace switcher (placeholder)
-- [ ] Ícones de navegação: Pipeline, Leads, Dashboard, Settings (usando `lucide-react`)
-- [ ] Header com breadcrumb, avatar do usuário e botão de logout (placeholder)
-- [ ] Página index `/` redirecionando para `/pipeline`
-- [ ] Página placeholder `/pipeline` com título e conteúdo vazio
-- [ ] Página placeholder `/leads` com título e conteúdo vazio
-- [ ] Página placeholder `/dashboard` com título e conteúdo vazio
-- [ ] Página placeholder `/settings` com título e conteúdo vazio
-- [ ] Responsividade básica: sidebar colapsável em mobile
-- [ ] Tema consistente: paleta slate + accent indigo via CSS variables do shadcn/ui
+- [x] Layout raiz em `app/layout.tsx` com fonte Inter e providers
+- [x] Layout do dashboard em `app/(dashboard)/layout.tsx` com sidebar + área de conteúdo
+- [x] Componente `Sidebar` com logo PipeFlow, links de navegação e workspace switcher (placeholder)
+- [x] Ícones de navegação: Pipeline, Leads, Dashboard, Settings (usando `lucide-react`)
+- [x] Header com breadcrumb, avatar do usuário e botão de logout (placeholder)
+- [x] Página index `/` redirecionando para `/pipeline`
+- [x] Página placeholder `/pipeline` com título e conteúdo vazio
+- [x] Página placeholder `/leads` com título e conteúdo vazio
+- [x] Página placeholder `/dashboard` com título e conteúdo vazio
+- [x] Página placeholder `/settings` com título e conteúdo vazio
+- [x] Responsividade básica: sidebar colapsável em mobile
+- [x] Tema consistente: paleta slate + accent indigo via CSS variables do shadcn/ui
 
 ### Commit Final
 ```
