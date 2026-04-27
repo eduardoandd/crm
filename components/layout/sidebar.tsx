@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Kanban,
   Users,
@@ -111,6 +111,7 @@ function WorkspaceAvatar({
 
 function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [activeWorkspace, setActiveWorkspace] = useState(MOCK_WORKSPACES[0]);
 
   const isActive = (href: string) =>
@@ -291,7 +292,10 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive cursor-pointer">
+            <DropdownMenuItem
+              className="gap-2 text-destructive focus:text-destructive cursor-pointer"
+              onClick={() => router.push("/login")}
+            >
               <LogOut className="w-3.5 h-3.5" />
               Sair da conta
             </DropdownMenuItem>
