@@ -54,6 +54,21 @@ type SortDir = "asc" | "desc";
 
 const PAGE_SIZE = 10;
 
+function SortIcon({
+  field,
+  sortField,
+  sortDir,
+}: {
+  field: SortField;
+  sortField: SortField;
+  sortDir: SortDir;
+}) {
+  if (field !== sortField) return <ChevronsUpDown className="w-3 h-3 ml-1 opacity-40" />;
+  return sortDir === "asc"
+    ? <ChevronUp className="w-3 h-3 ml-1 text-primary" />
+    : <ChevronDown className="w-3 h-3 ml-1 text-primary" />;
+}
+
 interface LeadsTableProps {
   initialLeads: Lead[];
 }
@@ -116,13 +131,6 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
     setPage(1);
   }
 
-  function SortIcon({ field }: { field: SortField }) {
-    if (field !== sortField) return <ChevronsUpDown className="w-3 h-3 ml-1 opacity-40" />;
-    return sortDir === "asc"
-      ? <ChevronUp className="w-3 h-3 ml-1 text-primary" />
-      : <ChevronDown className="w-3 h-3 ml-1 text-primary" />;
-  }
-
   // ── Ações ─────────────────────────────────────────────────────────────────
   function handleNew() {
     setEditingLead(null);
@@ -146,8 +154,8 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
         id: String(Date.now()),
         workspace_id: "1",
         name: data.name ?? "",
-        email: data.email ?? null,
-        phone: data.phone ?? null,
+        email: data.email || null,
+        phone: data.phone || null,
         company: data.company ?? null,
         position: data.position ?? null,
         status: (data.status as LeadStatus) ?? "novo",
@@ -219,7 +227,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 onClick={() => handleSort("name")}
               >
                 <span className="flex items-center">
-                  Nome <SortIcon field="name" />
+                  Nome <SortIcon field="name" sortField={sortField} sortDir={sortDir} />
                 </span>
               </TableHead>
               <TableHead
@@ -227,7 +235,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 onClick={() => handleSort("company")}
               >
                 <span className="flex items-center">
-                  Empresa <SortIcon field="company" />
+                  Empresa <SortIcon field="company" sortField={sortField} sortDir={sortDir} />
                 </span>
               </TableHead>
               <TableHead
@@ -235,7 +243,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 onClick={() => handleSort("status")}
               >
                 <span className="flex items-center">
-                  Status <SortIcon field="status" />
+                  Status <SortIcon field="status" sortField={sortField} sortDir={sortDir} />
                 </span>
               </TableHead>
               <TableHead className="hidden lg:table-cell">Responsável</TableHead>
@@ -244,7 +252,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 onClick={() => handleSort("created_at")}
               >
                 <span className="flex items-center">
-                  Criado em <SortIcon field="created_at" />
+                  Criado em <SortIcon field="created_at" sortField={sortField} sortDir={sortDir} />
                 </span>
               </TableHead>
               <TableHead className="w-20" />
