@@ -91,15 +91,15 @@ feat: app shell com sidebar, navegação e layout base
 **Objetivo**: Fluxo visual completo de autenticação, sem backend ainda.
 
 ### Entregas
-- [ ] Layout de auth em `app/(auth)/layout.tsx` — tela dividida (formulário + hero visual)
-- [ ] Página `/login` com formulário: e-mail, senha, botão "Entrar", link "Esqueci minha senha"
-- [ ] Página `/signup` com formulário: nome, e-mail, senha, confirmação de senha, botão "Criar conta"
-- [ ] Página `/forgot-password` com formulário: e-mail + botão "Enviar link"
-- [ ] Componente `AuthForm` reutilizável com validação via `react-hook-form` + `zod`
-- [ ] Link "Não tem conta? Cadastre-se" no login e vice-versa
-- [ ] Estado de loading nos botões durante submit
-- [ ] Tratamento visual de erros (campo inválido destacado + mensagem)
-- [ ] Rota de auth guard (middleware placeholder que sempre redireciona para `/pipeline`)
+- [x] Layout de auth em `app/(auth)/layout.tsx` — tela dividida (formulário + hero visual)
+- [x] Página `/login` com formulário: e-mail, senha, botão "Entrar", link "Esqueci minha senha"
+- [x] Página `/signup` com formulário: nome, e-mail, senha, confirmação de senha, botão "Criar conta"
+- [x] Página `/forgot-password` com formulário: e-mail + botão "Enviar link"
+- [x] Componente `AuthForm` reutilizável com validação via `react-hook-form` + `zod`
+- [x] Link "Não tem conta? Cadastre-se" no login e vice-versa
+- [x] Estado de loading nos botões durante submit
+- [x] Tratamento visual de erros (campo inválido destacado + mensagem)
+- [x] Rota de auth guard (middleware placeholder que sempre redireciona para `/pipeline`)
 
 ### Commit Final
 ```
