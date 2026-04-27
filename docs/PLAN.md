@@ -61,18 +61,18 @@ feat: setup inicial do projeto PipeFlow CRM
 **Objetivo**: O esqueleto visual do app — sidebar, header, navegação e tema funcionando.
 
 ### Entregas
-- [ ] Layout raiz em `app/layout.tsx` com fonte Inter e providers
-- [ ] Layout do dashboard em `app/(dashboard)/layout.tsx` com sidebar + área de conteúdo
-- [ ] Componente `Sidebar` com logo PipeFlow, links de navegação e workspace switcher (placeholder)
-- [ ] Ícones de navegação: Pipeline, Leads, Dashboard, Settings (usando `lucide-react`)
-- [ ] Header com breadcrumb, avatar do usuário e botão de logout (placeholder)
-- [ ] Página index `/` redirecionando para `/pipeline`
-- [ ] Página placeholder `/pipeline` com título e conteúdo vazio
-- [ ] Página placeholder `/leads` com título e conteúdo vazio
-- [ ] Página placeholder `/dashboard` com título e conteúdo vazio
-- [ ] Página placeholder `/settings` com título e conteúdo vazio
-- [ ] Responsividade básica: sidebar colapsável em mobile
-- [ ] Tema consistente: paleta slate + accent indigo via CSS variables do shadcn/ui
+- [x] Layout raiz em `app/layout.tsx` com fonte Inter e providers
+- [x] Layout do dashboard em `app/(dashboard)/layout.tsx` com sidebar + área de conteúdo
+- [x] Componente `Sidebar` com logo PipeFlow, links de navegação e workspace switcher (placeholder)
+- [x] Ícones de navegação: Pipeline, Leads, Dashboard, Settings (usando `lucide-react`)
+- [x] Header com breadcrumb, avatar do usuário e botão de logout (placeholder)
+- [x] Página index `/` redirecionando para `/pipeline`
+- [x] Página placeholder `/pipeline` com título e conteúdo vazio
+- [x] Página placeholder `/leads` com título e conteúdo vazio
+- [x] Página placeholder `/dashboard` com título e conteúdo vazio
+- [x] Página placeholder `/settings` com título e conteúdo vazio
+- [x] Responsividade básica: sidebar colapsável em mobile
+- [x] Tema consistente: paleta slate + accent indigo via CSS variables do shadcn/ui
 
 ### Commit Final
 ```
@@ -91,15 +91,15 @@ feat: app shell com sidebar, navegação e layout base
 **Objetivo**: Fluxo visual completo de autenticação, sem backend ainda.
 
 ### Entregas
-- [ ] Layout de auth em `app/(auth)/layout.tsx` — tela dividida (formulário + hero visual)
-- [ ] Página `/login` com formulário: e-mail, senha, botão "Entrar", link "Esqueci minha senha"
-- [ ] Página `/signup` com formulário: nome, e-mail, senha, confirmação de senha, botão "Criar conta"
-- [ ] Página `/forgot-password` com formulário: e-mail + botão "Enviar link"
-- [ ] Componente `AuthForm` reutilizável com validação via `react-hook-form` + `zod`
-- [ ] Link "Não tem conta? Cadastre-se" no login e vice-versa
-- [ ] Estado de loading nos botões durante submit
-- [ ] Tratamento visual de erros (campo inválido destacado + mensagem)
-- [ ] Rota de auth guard (middleware placeholder que sempre redireciona para `/pipeline`)
+- [x] Layout de auth em `app/(auth)/layout.tsx` — tela dividida (formulário + hero visual)
+- [x] Página `/login` com formulário: e-mail, senha, botão "Entrar", link "Esqueci minha senha"
+- [x] Página `/signup` com formulário: nome, e-mail, senha, confirmação de senha, botão "Criar conta"
+- [x] Página `/forgot-password` com formulário: e-mail + botão "Enviar link"
+- [x] Componente `AuthForm` reutilizável com validação via `react-hook-form` + `zod`
+- [x] Link "Não tem conta? Cadastre-se" no login e vice-versa
+- [x] Estado de loading nos botões durante submit
+- [x] Tratamento visual de erros (campo inválido destacado + mensagem)
+- [x] Rota de auth guard (middleware placeholder que sempre redireciona para `/pipeline`)
 
 ### Commit Final
 ```
