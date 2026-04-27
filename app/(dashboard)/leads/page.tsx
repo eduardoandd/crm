@@ -1,17 +1,19 @@
-import { Users } from "lucide-react";
+import { LeadsTable } from "@/components/leads/leads-table";
+import { MOCK_LEADS } from "@/lib/mock-data";
+
+export const metadata = { title: "Leads — PipeFlow" };
 
 export default function LeadsPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-dashed border-border text-center gap-3">
-      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-        <Users className="w-5 h-5 text-primary" />
-      </div>
-      <div>
-        <p className="text-sm font-medium">Gestão de Leads</p>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          Implementado na aula M4
+    <div>
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Leads</h2>
+        <p className="text-sm text-muted-foreground mt-0.5">
+          {MOCK_LEADS.length} leads cadastrados
         </p>
       </div>
+
+      <LeadsTable initialLeads={MOCK_LEADS} />
     </div>
   );
 }
