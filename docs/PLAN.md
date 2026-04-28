@@ -118,23 +118,23 @@ feat: páginas de autenticação (login, signup, forgot-password)
 **Objetivo**: Gestão visual completa de leads com dados mock — listagem, detalhe e formulário.
 
 ### Entregas
-- [ ] Criar `lib/mock-data.ts` com 15-20 leads de exemplo e atividades fictícias
-- [ ] Página `/leads` com listagem em tabela usando shadcn/ui `DataTable`
-  - [ ] Colunas: nome, empresa, status, responsável, data de criação
-  - [ ] Busca por nome/empresa (filtro client-side)
-  - [ ] Filtro por status (dropdown)
-  - [ ] Ordenação por coluna
-  - [ ] Paginação (10 por página)
-- [ ] Botão "Novo Lead" abre `Sheet` lateral com formulário
-- [ ] Componente `LeadForm` com campos: nome, e-mail, telefone, empresa, cargo, status
-- [ ] Badge de status com cores: Novo (slate), Em Contato (blue), Proposta (amber), Fechado Ganho (green), Fechado Perdido (red)
-- [ ] Página `/leads/[id]` com perfil completo do lead
-  - [ ] Header com nome, empresa, status badge e botões de ação
-  - [ ] Cards de informações: contato, empresa, responsável
-  - [ ] Seção de timeline (placeholder vazio com mensagem "Nenhuma atividade ainda")
-  - [ ] Botão "Editar Lead" abre formulário pré-preenchido
-- [ ] Componente `LeadCard` para uso futuro no pipeline
-- [ ] Confirmação de exclusão via `AlertDialog`
+- [x] Criar `lib/mock-data.ts` com 15-20 leads de exemplo e atividades fictícias
+- [x] Página `/leads` com listagem em tabela usando shadcn/ui `DataTable`
+  - [x] Colunas: nome, empresa, status, responsável, data de criação
+  - [x] Busca por nome/empresa (filtro client-side)
+  - [x] Filtro por status (dropdown)
+  - [x] Ordenação por coluna
+  - [x] Paginação (10 por página)
+- [x] Botão "Novo Lead" abre `Sheet` lateral com formulário
+- [x] Componente `LeadForm` com campos: nome, e-mail, telefone, empresa, cargo, status
+- [x] Badge de status com cores: Novo (slate), Em Contato (blue), Proposta (amber), Fechado Ganho (green), Fechado Perdido (red)
+- [x] Página `/leads/[id]` com perfil completo do lead
+  - [x] Header com nome, empresa, status badge e botões de ação
+  - [x] Cards de informações: contato, empresa, responsável
+  - [x] Seção de timeline (placeholder vazio com mensagem "Nenhuma atividade ainda")
+  - [x] Botão "Editar Lead" abre formulário pré-preenchido
+- [x] Componente `LeadCard` para uso futuro no pipeline
+- [x] Confirmação de exclusão via `AlertDialog`
 
 ### Commit Final
 ```
@@ -153,24 +153,24 @@ feat: módulo de leads (listagem, detalhe, formulário) com dados mock
 **Objetivo**: Kanban visual com drag-and-drop fluido entre colunas, usando dados mock.
 
 ### Entregas
-- [ ] Página `/pipeline` com layout horizontal de colunas scrolláveis
-- [ ] Componente `KanbanBoard` como container principal com `DndContext` do `@dnd-kit`
-- [ ] Componente `KanbanColumn` para cada estágio do pipeline
-  - [ ] Header com nome da etapa, contagem de deals e valor total (R$)
-  - [ ] Área droppable para receber cards
-  - [ ] Botão "+" para adicionar deal naquela coluna
-- [ ] 6 colunas: Novo Lead, Contato Realizado, Proposta Enviada, Negociação, Fechado Ganho, Fechado Perdido
-- [ ] Componente `DealCard` com:
-  - [ ] Título do negócio
-  - [ ] Valor estimado formatado em R$
-  - [ ] Avatar + nome do responsável
-  - [ ] Prazo com indicação visual (verde, amarelo, vermelho)
-  - [ ] Nome do lead vinculado
-- [ ] Drag-and-drop entre colunas com animação suave (`@dnd-kit/sortable`)
-- [ ] Estado local de atualização de etapa (sem persistência ainda)
-- [ ] Formulário de criação de deal em `Dialog`: título, valor, lead, responsável, prazo, etapa
-- [ ] Ao clicar no card, abre `Sheet` lateral com detalhe do deal (placeholder)
-- [ ] Header da página com total de negócios abertos e valor agregado do pipeline
+- [x] Página `/pipeline` com layout horizontal de colunas scrolláveis
+- [x] Componente `KanbanBoard` como container principal com `DndContext` do `@dnd-kit`
+- [x] Componente `KanbanColumn` para cada estágio do pipeline
+  - [x] Header com nome da etapa, contagem de deals e valor total (R$)
+  - [x] Área droppable para receber cards
+  - [x] Botão "+" para adicionar deal naquela coluna
+- [x] 6 colunas: Novo Lead, Contato Realizado, Proposta Enviada, Negociação, Fechado Ganho, Fechado Perdido
+- [x] Componente `DealCard` com:
+  - [x] Título do negócio
+  - [x] Valor estimado formatado em R$
+  - [x] Avatar + nome do responsável
+  - [x] Prazo com indicação visual (verde, amarelo, vermelho)
+  - [x] Nome do lead vinculado
+- [x] Drag-and-drop entre colunas com animação suave (`@dnd-kit/sortable`)
+- [x] Estado local de atualização de etapa (sem persistência ainda)
+- [x] Formulário de criação de deal em `Dialog`: título, valor, lead, responsável, prazo, etapa
+- [x] Ao clicar no card, abre `Sheet` lateral com detalhe do deal (placeholder)
+- [x] Header da página com total de negócios abertos e valor agregado do pipeline
 
 ### Commit Final
 ```
