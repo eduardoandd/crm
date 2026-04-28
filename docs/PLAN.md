@@ -247,18 +247,18 @@ feat: landing page pública do PipeFlow CRM
 **Objetivo**: Banco de dados real, auth funcionando e middleware de proteção de rotas.
 
 ### Entregas
-- [ ] Configurar projeto Supabase (local via `supabase start`)
+- [x] Configurar projeto Supabase (local via `supabase start`)
 - [x] Criar `lib/supabase/client.ts` (browser client com `createBrowserClient`)
 - [x] Criar `lib/supabase/server.ts` (server client com `createServerClient`)
 - [ ] Criar `middleware.ts` na raiz com refresh de sessão e proteção de rotas
-- [ ] Migration `001_init_schema.sql`:
-  - [ ] Tabela `workspaces` (id, name, slug, plan, stripe_customer_id, created_at)
-  - [ ] Tabela `workspace_members` (workspace_id, user_id, role, joined_at)
-  - [ ] Tabela `leads` (id, workspace_id, name, email, phone, company, position, status, assignee_id, created_at, updated_at)
-  - [ ] Tabela `deals` (id, workspace_id, lead_id, title, value, stage, assignee_id, due_date, created_at, updated_at)
-  - [ ] Tabela `activities` (id, lead_id, workspace_id, author_id, type, description, date, created_at)
-- [ ] Migration `002_rls_policies.sql` — RLS para todas as tabelas baseado em `workspace_id`
-- [ ] Trigger para criar workspace padrão ao registrar novo usuário
+- [x] Migration `001_init_schema.sql`:
+  - [x] Tabela `workspaces` (id, name, slug, plan, stripe_customer_id, created_at)
+  - [x] Tabela `workspace_members` (workspace_id, user_id, role, joined_at)
+  - [x] Tabela `leads` (id, workspace_id, name, email, phone, company, position, status, assignee_id, created_at, updated_at)
+  - [x] Tabela `deals` (id, workspace_id, lead_id, title, value, stage, assignee_id, due_date, created_at, updated_at)
+  - [x] Tabela `activities` (id, lead_id, workspace_id, author_id, type, description, date, created_at)
+- [x] Migration `002_rls_policies.sql` — RLS para todas as tabelas baseado em `workspace_id`
+- [x] Trigger para criar workspace padrão ao registrar novo usuário
 - [ ] Conectar formulários de auth ao Supabase Auth:
   - [ ] Login com e-mail/senha
   - [ ] Signup com criação de perfil e workspace
