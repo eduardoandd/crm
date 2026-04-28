@@ -248,8 +248,8 @@ feat: landing page pública do PipeFlow CRM
 
 ### Entregas
 - [ ] Configurar projeto Supabase (local via `supabase start`)
-- [ ] Criar `lib/supabase/client.ts` (browser client com `createBrowserClient`)
-- [ ] Criar `lib/supabase/server.ts` (server client com `createServerClient`)
+- [x] Criar `lib/supabase/client.ts` (browser client com `createBrowserClient`)
+- [x] Criar `lib/supabase/server.ts` (server client com `createServerClient`)
 - [ ] Criar `middleware.ts` na raiz com refresh de sessão e proteção de rotas
 - [ ] Migration `001_init_schema.sql`:
   - [ ] Tabela `workspaces` (id, name, slug, plan, stripe_customer_id, created_at)
@@ -265,7 +265,7 @@ feat: landing page pública do PipeFlow CRM
   - [ ] Forgot password com e-mail de reset
   - [ ] Logout
 - [ ] Remover middleware placeholder e ativar auth guard real
-- [ ] Variáveis de ambiente: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- [x] Variáveis de ambiente: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ### Commit Final
 ```
