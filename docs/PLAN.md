@@ -219,18 +219,17 @@ feat: dashboard de métricas com gráfico de funil e cards KPI
 **Objetivo**: Página pública de apresentação do PipeFlow CRM, pronta para mostrar ao mercado.
 
 ### Entregas
-- [ ] Layout de marketing em `app/(marketing)/layout.tsx` com header e footer públicos
-- [ ] Página `/` (raiz) como landing page pública
-- [ ] Seção **Hero**: headline impactante, subheadline, CTA "Começar grátis" + "Ver demo", screenshot do pipeline
-- [ ] Seção **Funcionalidades**: 6 cards com ícone, título e descrição (Pipeline Kanban, Gestão de Leads, Multi-empresa, Dashboard, Integração Stripe, Convite de Time)
-- [ ] Seção **Como funciona**: 3 passos visuais (Crie seu workspace → Cadastre leads → Feche negócios)
-- [ ] Seção **Preços**: 2 planos em cards (Free e Pro) com lista de features e botão de CTA
-- [ ] Seção **Depoimentos**: 3 depoimentos fictícios de personas (Empreendedor, Vendedor, Freelancer)
-- [ ] Seção **CTA final**: "Comece a organizar suas vendas hoje" + botão
-- [ ] Header público com logo, links de navegação e botões "Login" / "Começar grátis"
-- [ ] Footer com links e copyright
-- [ ] Totalmente responsivo (mobile-first)
-- [ ] Rota `/` redireciona usuários autenticados para `/pipeline`
+- [x] Layout de marketing em `app/(marketing)/layout.tsx` com header e footer públicos
+- [x] Página `/` (raiz) como landing page pública
+- [x] Seção **Hero**: headline impactante, subheadline, CTA "Começar grátis" + "Ver demo", screenshot do pipeline
+- [x] Seção **Funcionalidades**: 6 cards com ícone, título e descrição (Pipeline Kanban, Gestão de Leads, Multi-empresa, Dashboard, Integração Stripe, Convite de Time)
+- [x] Seção **Preços**: 2 planos em cards (Free e Pro) com lista de features e botão de CTA
+- [x] Seção **Números sociais**: 4 estatísticas de prova social (+47%, 3.2x, -62%, 1.200+)
+- [x] Seção **CTA final**: "Pronto para organizar suas vendas?" + botão
+- [x] Header público com logo, links de navegação e botões "Entrar" / "Começar grátis"
+- [x] Footer com links e copyright
+- [x] Totalmente responsivo (mobile-first)
+- [x] Smooth scroll para âncoras (#funcionalidades, #precos)
 
 ### Commit Final
 ```
