@@ -189,18 +189,18 @@ feat: pipeline Kanban com drag-and-drop entre estágios
 **Objetivo**: Painel de métricas e gráficos com dados mock representativos.
 
 ### Entregas
-- [ ] Página `/dashboard` com grid de cards e gráfico
-- [ ] 4 cards de métricas (componente `MetricCard`):
-  - [ ] Total de Leads
-  - [ ] Negócios Abertos
-  - [ ] Valor do Pipeline (R$)
-  - [ ] Taxa de Conversão (%)
-- [ ] Cada card com: valor principal, variação percentual e ícone
-- [ ] Componente `FunnelChart` com Recharts mostrando leads por estágio
-- [ ] Seção "Negócios com prazo próximo" — lista dos 5 deals com prazo nos próximos 7 dias
-- [ ] Seção "Atividade recente" — timeline das últimas 5 atividades do workspace
-- [ ] Filtro de período no header: Últimos 7 dias / 30 dias / 90 dias / Este mês
-- [ ] Layout responsivo: 2 colunas no desktop, 1 coluna no mobile
+- [x] Página `/dashboard` com grid de cards e gráfico
+- [x] 4 cards de métricas (componente `MetricCard`):
+  - [x] Total de Leads
+  - [x] Negócios Abertos
+  - [x] Valor do Pipeline (R$)
+  - [x] Taxa de Conversão (%)
+- [x] Cada card com: valor principal, variação percentual e ícone
+- [x] Componente `FunnelChart` com Recharts mostrando leads por estágio
+- [x] Seção "Negócios com prazo próximo" — lista dos 5 deals com prazo nos próximos 7 dias
+- [x] Seção "Atividade recente" — timeline das últimas 5 atividades do workspace
+- [x] Filtro de período no header: Últimos 7 dias / 30 dias / 90 dias / Este mês
+- [x] Layout responsivo: 2 colunas no desktop, 1 coluna no mobile
 
 ### Commit Final
 ```
