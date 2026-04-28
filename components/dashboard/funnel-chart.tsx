@@ -8,8 +8,6 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
-  useActiveTooltipDataPoints,
-  useIsTooltipActive,
 } from "recharts"
 import type { MOCK_FUNNEL } from "@/lib/mock-dashboard"
 
@@ -21,16 +19,14 @@ function formatValue(n: number): string {
   return `R$${n}`
 }
 
-interface TooltipDataPoint {
-  payload: FunnelEntry
+interface CustomTooltipProps {
+  active?: boolean
+  payload?: Array<{ payload: FunnelEntry }>
 }
 
-function CustomTooltipContent() {
-  const isActive = useIsTooltipActive()
-  const dataPoints = useActiveTooltipDataPoints() as TooltipDataPoint[] | null
-
-  if (!isActive || !dataPoints?.length) return null
-  const d = dataPoints[0].payload
+function CustomTooltipContent({ active, payload }: CustomTooltipProps) {
+  if (!active || !payload?.length) return null
+  const d = payload[0].payload
 
   return (
     <div className="rounded-lg border border-border bg-card px-3 py-2 shadow-lg text-xs">
@@ -46,14 +42,23 @@ interface FunnelChartProps {
 }
 
 export function FunnelChart({ data }: FunnelChartProps) {
+  const totalDeals = data.reduce((s, d) => s + d.deals, 0)
+  const totalValue = data.reduce((s, d) => s + d.value, 0)
+  const topStage = data[0]
+  const wonStage = data.find((d) => d.stage === "fechado_ganho")
+  const convRate =
+    topStage && wonStage
+      ? ((wonStage.deals / topStage.deals) * 100).toFixed(0)
+      : "0"
+
   return (
-    <div className="bg-card border border-border rounded-xl p-5">
+    <div className="bg-card border border-border rounded-xl p-5 flex flex-col h-full">
       <div className="mb-4">
         <p className="text-sm font-semibold text-foreground">Funil de Vendas</p>
         <p className="text-xs text-muted-foreground mt-0.5">Deals por estágio</p>
       </div>
 
-      <div style={{ height: 220 }}>
+      <div className="flex-1 min-h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
@@ -77,6 +82,21 @@ export function FunnelChart({ data }: FunnelChartProps) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+      </div>
+
+      <div className="mt-4 pt-4 border-t border-border grid grid-cols-3 gap-4">
+        <div>
+          <p className="text-xs text-muted-foreground">Total de deals</p>
+          <p className="text-sm font-semibold text-foreground mt-0.5">{totalDeals}</p>
+        </div>
+        <div>
+          <p className="text-xs text-muted-foreground">Valor total</p>
+          <p className="text-sm font-semibold text-foreground mt-0.5">{formatValue(totalValue)}</p>
+        </div>
+        <div>
+          <p className="text-xs text-muted-foreground">Conv. entrada→ganho</p>
+          <p className="text-sm font-semibold mt-0.5" style={{ color: "#22C55E" }}>{convRate}%</p>
+        </div>
       </div>
     </div>
   )
