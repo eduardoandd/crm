@@ -16,6 +16,7 @@ export type Database = {
           slug: string
           plan: 'free' | 'pro'
           stripe_customer_id: string | null
+          onboarding_completed: boolean
           created_at: string
         }
         Insert: {
@@ -24,6 +25,7 @@ export type Database = {
           slug: string
           plan?: 'free' | 'pro'
           stripe_customer_id?: string | null
+          onboarding_completed?: boolean
           created_at?: string
         }
         Update: {
@@ -32,6 +34,7 @@ export type Database = {
           slug?: string
           plan?: 'free' | 'pro'
           stripe_customer_id?: string | null
+          onboarding_completed?: boolean
           created_at?: string
         }
       }

@@ -5,10 +5,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, ArrowLeft, MailCheck } from "lucide-react";
-
+import { Loader2, ArrowLeft, MailCheck, AlertCircle } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Form,
   FormControl,
@@ -33,10 +34,21 @@ export function ForgotPasswordForm() {
     defaultValues: { email: "" },
   });
 
-  const { isSubmitting } = form.formState;
+  const { isSubmitting, errors } = form.formState;
 
   async function onSubmit(data: FormData) {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    form.clearErrors("root");
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
+      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
+    });
+
+    if (error) {
+      form.setError("root", { message: "Ocorreu um erro. Tente novamente." });
+      return;
+    }
+
     setSubmittedEmail(data.email);
     setSubmitted(true);
   }
@@ -84,6 +96,13 @@ export function ForgotPasswordForm() {
           Informe seu e-mail e enviaremos um link para redefinir sua senha.
         </p>
       </div>
+
+      {errors.root && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{errors.root.message}</AlertDescription>
+        </Alert>
+      )}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

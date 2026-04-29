@@ -6,10 +6,11 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, Eye, EyeOff } from "lucide-react";
-
+import { Loader2, Eye, EyeOff, AlertCircle } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Form,
   FormControl,
@@ -26,6 +27,16 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+function mapError(msg: string): string {
+  if (msg.includes("Invalid login credentials"))
+    return "E-mail ou senha inválidos";
+  if (msg.includes("Email not confirmed"))
+    return "Confirme seu e-mail antes de entrar";
+  if (msg.includes("rate limit") || msg.includes("too many"))
+    return "Muitas tentativas. Aguarde alguns minutos";
+  return "Ocorreu um erro. Tente novamente";
+}
+
 export function LoginForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -35,12 +46,48 @@ export function LoginForm() {
     defaultValues: { email: "", password: "" },
   });
 
-  const { isSubmitting } = form.formState;
+  const { isSubmitting, errors } = form.formState;
 
-  async function onSubmit() {
-    // Simulação de chamada de API — substituído pelo Supabase no M8
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  async function onSubmit(data: FormData) {
+    form.clearErrors("root");
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      form.setError("root", { message: mapError(error.message) });
+      return;
+    }
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const { data: membership } = await supabase
+        .from("workspace_members")
+        .select("workspaces(onboarding_completed)")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .limit(1)
+        .maybeSingle();
+
+      const workspace = (membership?.workspaces ?? null) as
+        | { onboarding_completed: boolean }
+        | null;
+
+      if (workspace && !workspace.onboarding_completed) {
+        router.push("/onboarding");
+        router.refresh();
+        return;
+      }
+    }
+
     router.push("/pipeline");
+    router.refresh();
   }
 
   return (
@@ -51,6 +98,13 @@ export function LoginForm() {
           Entre com sua conta para continuar
         </p>
       </div>
+
+      {errors.root && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{errors.root.message}</AlertDescription>
+        </Alert>
+      )}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

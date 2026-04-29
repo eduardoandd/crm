@@ -25,6 +25,7 @@ export interface Workspace {
   slug: string;
   plan: WorkspacePlan;
   stripe_customer_id: string | null;
+  onboarding_completed: boolean;
   created_at: string;
 }
 

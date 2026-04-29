@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, Eye, EyeOff, Check, X, MailCheck, AlertCircle } from "lucide-react";
+import { Loader2, Eye, EyeOff, AlertCircle, Check, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,8 +22,6 @@ import { cn } from "@/lib/utils";
 
 const schema = z
   .object({
-    name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-    email: z.string().email("E-mail inválido"),
     password: z
       .string()
       .min(8, "Mínimo 8 caracteres")
@@ -32,115 +29,61 @@ const schema = z
       .regex(/[0-9]/, "Pelo menos um número"),
     confirmPassword: z.string().min(1, "Confirme sua senha"),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((d) => d.password === d.confirmPassword, {
     message: "As senhas não coincidem",
     path: ["confirmPassword"],
   });
 
 type FormData = z.infer<typeof schema>;
 
-type PasswordRule = { label: string; test: (v: string) => boolean };
-
-const PASSWORD_RULES: PasswordRule[] = [
-  { label: "Mínimo 8 caracteres", test: (v) => v.length >= 8 },
-  { label: "Letra maiúscula", test: (v) => /[A-Z]/.test(v) },
-  { label: "Número", test: (v) => /[0-9]/.test(v) },
+const PASSWORD_RULES = [
+  { label: "Mínimo 8 caracteres", test: (v: string) => v.length >= 8 },
+  { label: "Letra maiúscula", test: (v: string) => /[A-Z]/.test(v) },
+  { label: "Número", test: (v: string) => /[0-9]/.test(v) },
 ];
 
-function mapError(msg: string): string {
-  if (msg.includes("already registered") || msg.includes("already exists"))
-    return "Já existe uma conta com este e-mail";
-  if (msg.includes("password"))
-    return "Senha não atende aos requisitos mínimos";
-  if (msg.includes("rate limit") || msg.includes("too many"))
-    return "Muitas tentativas. Aguarde alguns minutos";
-  return "Ocorreu um erro. Tente novamente";
-}
-
-export function SignupForm() {
+export function ResetPasswordForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [sentEmail, setSentEmail] = useState("");
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
+    defaultValues: { password: "", confirmPassword: "" },
     mode: "onChange",
   });
 
   const { isSubmitting, errors } = form.formState;
   const passwordValue = form.watch("password");
-  const showRules = passwordValue.length > 0;
 
   async function onSubmit(data: FormData) {
     form.clearErrors("root");
     const supabase = createClient();
 
-    const { data: result, error } = await supabase.auth.signUp({
-      email: data.email,
+    const { error } = await supabase.auth.updateUser({
       password: data.password,
-      options: {
-        data: { full_name: data.name },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
     });
 
     if (error) {
-      form.setError("root", { message: mapError(error.message) });
+      form.setError("root", {
+        message:
+          error.message.includes("same password")
+            ? "A nova senha não pode ser igual à anterior"
+            : "Ocorreu um erro. Tente novamente",
+      });
       return;
     }
 
-    // Email confirmation desabilitado (dev local) → sessão imediata
-    if (result.session) {
-      router.push("/onboarding");
-      router.refresh();
-      return;
-    }
-
-    // Email confirmation habilitado → aguarda confirmação
-    setSentEmail(data.email);
-  }
-
-  // Estado pós-signup: aguardando confirmação de e-mail
-  if (sentEmail) {
-    return (
-      <div>
-        <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
-          <MailCheck className="w-6 h-6 text-primary" />
-        </div>
-        <h1 className="text-2xl font-bold tracking-tight mb-2">
-          Verifique seu e-mail
-        </h1>
-        <p className="text-sm text-muted-foreground mb-1">
-          Enviamos um link de confirmação para:
-        </p>
-        <p className="text-sm font-medium mb-6">{sentEmail}</p>
-        <p className="text-xs text-muted-foreground mb-8 leading-relaxed">
-          Clique no link no e-mail para ativar sua conta. Não recebeu?{" "}
-          <button
-            className="text-primary hover:underline"
-            onClick={() => setSentEmail("")}
-          >
-            Tentar novamente
-          </button>
-          .
-        </p>
-        <Link href="/login">
-          <Button variant="outline" className="w-full">
-            Voltar para o login
-          </Button>
-        </Link>
-      </div>
-    );
+    router.push("/pipeline");
+    router.refresh();
   }
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight">Criar conta grátis</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Redefinir senha</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Comece a organizar suas vendas hoje
+          Escolha uma nova senha para sua conta.
         </p>
       </div>
 
@@ -155,49 +98,10 @@ export function SignupForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome completo</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Eduardo Santos"
-                    autoComplete="name"
-                    disabled={isSubmitting}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>E-mail</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="voce@empresa.com"
-                    autoComplete="email"
-                    disabled={isSubmitting}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Senha</FormLabel>
+                <FormLabel>Nova senha</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -224,7 +128,7 @@ export function SignupForm() {
                 </FormControl>
                 <FormMessage />
 
-                {showRules && (
+                {passwordValue.length > 0 && (
                   <ul className="mt-2 space-y-1">
                     {PASSWORD_RULES.map((rule) => {
                       const ok = rule.test(passwordValue);
@@ -256,7 +160,7 @@ export function SignupForm() {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Confirmar senha</FormLabel>
+                <FormLabel>Confirmar nova senha</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -290,21 +194,14 @@ export function SignupForm() {
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Criando conta…
+                Salvando…
               </>
             ) : (
-              "Criar conta grátis"
+              "Salvar nova senha"
             )}
           </Button>
         </form>
       </Form>
-
-      <p className="text-center text-sm text-muted-foreground mt-6">
-        Já tem uma conta?{" "}
-        <Link href="/login" className="text-primary hover:underline font-medium">
-          Entrar
-        </Link>
-      </p>
     </div>
   );
 }

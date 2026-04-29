@@ -250,7 +250,7 @@ feat: landing page pública do PipeFlow CRM
 - [x] Configurar projeto Supabase (local via `supabase start`)
 - [x] Criar `lib/supabase/client.ts` (browser client com `createBrowserClient`)
 - [x] Criar `lib/supabase/server.ts` (server client com `createServerClient`)
-- [ ] Criar `middleware.ts` na raiz com refresh de sessão e proteção de rotas
+- [x] Criar `middleware.ts` na raiz com refresh de sessão e proteção de rotas
 - [x] Migration `001_init_schema.sql`:
   - [x] Tabela `workspaces` (id, name, slug, plan, stripe_customer_id, created_at)
   - [x] Tabela `workspace_members` (workspace_id, user_id, role, joined_at)
@@ -259,12 +259,12 @@ feat: landing page pública do PipeFlow CRM
   - [x] Tabela `activities` (id, lead_id, workspace_id, author_id, type, description, date, created_at)
 - [x] Migration `002_rls_policies.sql` — RLS para todas as tabelas baseado em `workspace_id`
 - [x] Trigger para criar workspace padrão ao registrar novo usuário
-- [ ] Conectar formulários de auth ao Supabase Auth:
-  - [ ] Login com e-mail/senha
-  - [ ] Signup com criação de perfil e workspace
-  - [ ] Forgot password com e-mail de reset
-  - [ ] Logout
-- [ ] Remover middleware placeholder e ativar auth guard real
+- [x] Conectar formulários de auth ao Supabase Auth:
+  - [x] Login com e-mail/senha
+  - [x] Signup com criação de perfil e workspace
+  - [x] Forgot password com e-mail de reset
+  - [x] Logout
+- [x] Remover middleware placeholder e ativar auth guard real
 - [x] Variáveis de ambiente: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ### Commit Final
